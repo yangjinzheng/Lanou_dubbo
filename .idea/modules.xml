@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LanouApi/LanouApi.iml" filepath="$PROJECT_DIR$/LanouApi/LanouApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LanouService/LanouService.iml" filepath="$PROJECT_DIR$/LanouService/LanouService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LanouWeb/LanouWeb.iml" filepath="$PROJECT_DIR$/LanouWeb/LanouWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lanou_dubbo.iml" filepath="$PROJECT_DIR$/Lanou_dubbo.iml" />
+    </modules>
+  </component>
+</project>

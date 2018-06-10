@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="LanouWeb:war">
+    <output-path>$PROJECT_DIR$/LanouWeb/target</output-path>
+    <root id="archive" name="LanouWeb-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="LanouWeb:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+  <!--配置datasource-->
+  <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" abstract="true">-->
+  <!--<property name="location" value="classpath:db.properties"/>-->
+  <!--</bean>-->
+ <import resource="applicationContext-consumer.xml"/>
+    <context:component-scan base-package="Realm" />
+  <!--自定义realm-->
+  <bean id="myrealm" class="Realm.Myrealm"></bean>
+  <!--安全管理器-->
+  <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="realm" ref="myrealm"/>
+  </bean>
+  <!--shiro过滤器，shiro.ini交给spring来代理-->
+  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <!--shiro的核心安全接口，这个属性是必须的-->
+    <property name="securityManager" ref="securityManager"/>
+    <!--身份认证失败则跳转到登陆页面的配置-->
+    <property name="loginUrl" value="/tologin"/>
+    <!--shiro连接约束配置，及过滤链的定义-->
+    <property name="filterChainDefinitions">
+      <value>
+        /tologin=anon
+        /login=anon
+        /main=authc
+      </value>
+    </property>
+  </bean>
+  <!--开启shiro注解-->
+  <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+  <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    <property name="securityManager" ref="securityManager"/>
+  </bean>
+</beans>
